@@ -38,6 +38,11 @@
     <MicrosoftDotNetGenFacadesPackageVersion>1.0.0-beta.19461.7</MicrosoftDotNetGenFacadesPackageVersion>
     <MicrosoftDotNetXUnitExtensionsPackageVersion>2.4.1-beta.19461.7</MicrosoftDotNetXUnitExtensionsPackageVersion>
   </PropertyGroup>
+  <!-- ApiCompat -->
+  <PropertyGroup>
+    <MicrosoftDotNetApiCompatPackageVersion>1.0.0-beta.19461.7</MicrosoftDotNetApiCompatPackageVersion>
+    <NetFramework48RefAssembliesVersion>0.0.0.1</NetFramework48RefAssembliesVersion>
+  </PropertyGroup>
   <!-- Below have no corresponding entries in Versions.Details.XML because they are not updated via Maestro -->
   <!-- XUnit-related (not extensions) -->
   <PropertyGroup>

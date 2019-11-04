@@ -1,0 +1,41 @@
+<Project>
+
+  <!-- For full documentation of this file see: https://github.com/dotnet/wpf/blob/master/Documentation/api-compat.md -->
+
+  <PropertyGroup>
+
+    <!-- These assemblies need to be compared against the equivalent .NET Framework 4.8 assemblies. -->
+    <Net48CompatNeededProjects>
+      Accessibility.dll;
+      System.Design.dll;
+      System.Drawing.Design.dll;
+      System.Drawing.dll;
+      System.Windows.Forms.Design.dll;
+      System.Windows.Forms.dll
+    </Net48CompatNeededProjects>
+
+    <!-- 
+      We use blob storage to ensure that all machines we build on have the .NET Framework 4.8 reference assemblies.  
+      This allows us to sidestep a requirement to have the .NET 4.8 Dev Pack installed.
+    -->
+    <Net48RefAssembliesDir>$(RepositoryToolsDir)native\bin\net-framework-48-ref-assemblies\$(NetFramework48RefAssembliesVersion)\</Net48RefAssembliesDir>
+
+    <!-- Ignore anything we explicitly told GenAPI to remove from reference assemblies. -->
+    <ApiCompatExcludeAttributeList>$(WpfArcadeSdkRoot)tools\GenApi\GlobalAttrExclusions.txt</ApiCompatExcludeAttributeList>
+    
+    <!-- These assemblies need to be compared against their hand-crafted reference assemblies. -->
+    <RefApiCompatNeededProjects>
+      Accessibility.dll;
+      System.Design.dll;
+      System.Drawing.Design.dll;
+      System.Drawing.dll;
+      System.Windows.Forms.Design.dll;
+      System.Windows.Forms.Design.Editors.dll;
+      System.Windows.Forms.dll
+    </RefApiCompatNeededProjects>
+
+    <!-- TODO:  
+          Compare cycle breaker assemblies against what they break cycles for.
+    -->
+  </PropertyGroup>
+</Project>

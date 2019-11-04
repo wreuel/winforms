@@ -17,6 +17,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <!-- Disable ApiCompat -->
+  <PropertyGroup>
+    <SkipNetFrameworkApiCompat>true</SkipNetFrameworkApiCompat>
+  </PropertyGroup>
+
   <!-- This is a Packaging Project -->
   <PropertyGroup>
     <IsPackable>true</IsPackable>
