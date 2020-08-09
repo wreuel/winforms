@@ -157,7 +157,7 @@ namespace System.Windows.Forms
 
         private VisualStyleRenderer sizeGripRenderer;
 
-        private ThemingSuggestion themingSuggestion = ThemingSuggestion.Normal;
+        private ThemingMode requestedTheme = ThemingMode.Normal;
 
         /// <summary>
         ///  Initializes a new instance of the <see cref='Form'/> class.
@@ -2110,10 +2110,11 @@ namespace System.Windows.Forms
             set => base.Text = value;
         }
 
-        public ThemingSuggestion ThemingSuggestion
+        [DefaultValue(ThemingMode.Normal)]
+        public ThemingMode RequestedTheme
         {
-            get => themingSuggestion;
-            set => themingSuggestion = value;
+            get => requestedTheme;
+            set => requestedTheme = value;
         }
 
         public AdornerDrawMode AdornerDrawMode { get; set; } = AdornerDrawMode.Normal;
@@ -6748,17 +6749,17 @@ namespace System.Windows.Forms
         }
     }
 
-    public enum ThemingSuggestion
+    public enum ThemingMode
     {
-        Normal=0,
-        Blue,
-        Dark
+        Normal = 0,
+        Blue = 1,
+        Dark = 2
     }
 
     public enum AdornerDrawMode
     {
         Normal,
-        ApplyThemingSuggestion,
+        ApplyRequestedTheme,
         Custom
     }
 }
