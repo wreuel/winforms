@@ -157,6 +157,8 @@ namespace System.Windows.Forms
 
         private VisualStyleRenderer sizeGripRenderer;
 
+        private ThemingSuggestion themingSuggestion = ThemingSuggestion.Normal;
+
         /// <summary>
         ///  Initializes a new instance of the <see cref='Form'/> class.
         /// </summary>
@@ -2107,6 +2109,14 @@ namespace System.Windows.Forms
             get => base.Text;
             set => base.Text = value;
         }
+
+        public ThemingSuggestion ThemingSuggestion
+        {
+            get => themingSuggestion;
+            set => themingSuggestion = value;
+        }
+
+        public AdornerDrawMode AdornerDrawMode { get; set; } = AdornerDrawMode.Normal;
 
         /// <summary>
         ///  Gets or sets a value indicating whether to display the form as a top-level
@@ -4073,6 +4083,12 @@ namespace System.Windows.Forms
         protected virtual void OnInputLanguageChanging(InputLanguageChangingEventArgs e)
         {
             ((InputLanguageChangingEventHandler)Events[EVENT_INPUTLANGCHANGEREQUEST])?.Invoke(this, e);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        protected virtual void OnPaintNonClient(PaintEventArgs e)
+        {
+            //((PaintEventHandler)Events[s_paintEvent])?.Invoke(this, e);
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -6350,6 +6366,57 @@ namespace System.Windows.Forms
             }
         }
 
+        private void WmNCPaint(ref Message m)
+        {
+            //Rectangle clip;
+
+            // Gdi32.HDC dc = User32.GetDCEx(m.HWnd, m.WParam, User32.DCX.WINDOW | User32.DCX.INTERSECTRGN);
+            // Gdi32.HDC dc = User32.GetDCEx(m.HWnd, m.WParam, User32.DCX.WINDOW | User32.DCX.INTERSECTRGN | User32.DCX.CACHE);
+            Gdi32.HDC dc = User32.GetWindowDC(Handle);
+
+            RECT lpRect = new RECT();
+            Gdi32.GetClipBox(dc, ref lpRect);
+            User32.ReleaseDC(Handle, dc);
+
+            m.Result = IntPtr.Zero;
+            //var pevent = new PaintEventArgs(
+            //    dc,
+            //    clip);
+
+            //PaintWithErrorHandling(pevent);
+        }
+
+        // Exceptions during painting are nasty, because paint events happen so often.
+        // So if user painting code has an issue, we make sure never to call it again,
+        // so as not to spam the end-user with exception dialogs.
+        private void PaintWithErrorHandling(PaintEventArgs e)
+        {
+            try
+            {
+                CacheTextInternal = true;
+                if (!GetState(States.ExceptionWhilePainting))
+                {
+                    bool exceptionThrown = true;
+                    try
+                    {
+                        OnPaintNonClient(e);
+                        exceptionThrown = false;
+                    }
+                    finally
+                    {
+                        if (exceptionThrown)
+                        {
+                            SetState(States.ExceptionWhilePainting, true);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                CacheTextInternal = false;
+            }
+        }
+
         /// <summary>
         ///  WM_SHOWWINDOW handler
         /// </summary>
@@ -6541,6 +6608,17 @@ namespace System.Windows.Forms
                 case User32.WM.DPICHANGED:
                     WmDpiChanged(ref m);
                     break;
+                case User32.WM.NCPAINT:
+                    if (AdornerDrawMode != AdornerDrawMode.Normal)
+                    {
+                        WmNCPaint(ref m);
+                    }
+                    else
+                    {
+                        base.WndProc(ref m);
+                    }
+                    break;
+
                 default:
                     base.WndProc(ref m);
                     break;
@@ -6668,5 +6746,19 @@ namespace System.Windows.Forms
                 }
             }
         }
+    }
+
+    public enum ThemingSuggestion
+    {
+        Normal=0,
+        Blue,
+        Dark
+    }
+
+    public enum AdornerDrawMode
+    {
+        Normal,
+        ApplyThemingSuggestion,
+        Custom
     }
 }

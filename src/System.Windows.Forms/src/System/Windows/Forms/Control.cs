@@ -1781,6 +1781,21 @@ namespace System.Windows.Forms
         /// </summary>
         public static Color DefaultBackColor => SystemColors.Control;
 
+        private protected static Color GetDefaultBackColor(ThemingSuggestion theming)
+        {
+            switch (theming)
+            {
+                case ThemingSuggestion.Blue:
+                    return Color.LightBlue;
+
+                case ThemingSuggestion.Dark:
+                    return Color.DarkGray;
+
+                default:
+                    return SystemColors.Control;
+            }
+        }
+
         /// <summary>
         ///  Deriving classes can override this to configure a default cursor for their control.
         ///  This is more efficient than setting the cursor in the control's constructor,
