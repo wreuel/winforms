@@ -6748,18 +6748,4 @@ namespace System.Windows.Forms
             }
         }
     }
-
-    public enum ThemingMode
-    {
-        Normal = 0,
-        Blue = 1,
-        Dark = 2
-    }
-
-    public enum AdornerDrawMode
-    {
-        Normal,
-        ApplyRequestedTheme,
-        Custom
-    }
 }

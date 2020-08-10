@@ -1783,17 +1783,17 @@ namespace System.Windows.Forms
 
         private protected static Color GetDefaultBackColor(ThemingMode theming)
         {
-            switch (theming)
+            return theming switch
             {
-                case ThemingMode.Blue:
-                    return Color.LightBlue;
+                ThemingMode.Blue => Color.LightBlue,
+                ThemingMode.Dark => Color.FromArgb(40, 40, 40),
+                _ => DefaultBackColor,
+            };
+        }
 
-                case ThemingMode.Dark:
-                    return Color.DarkGray;
+        private protected static Color GetDefaultForeColor(ThemingMode theming)
+        {
 
-                default:
-                    return DefaultBackColor;
-            }
         }
 
         /// <summary>
