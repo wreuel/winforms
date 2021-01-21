@@ -33,7 +33,7 @@
   <PropertyGroup>
     <HelixSource>official/winforms</HelixSource> <!-- Change to pr/winforms for PR builds -->
     <HelixType>type/tests</HelixType>
-    <HelixTargetQueues>Windows.10.Amd64.Client19H1.Open</HelixTargetQueues> <!-- Change to 'Windows.10.Amd64.Client19H1.Xaml' for internal builds. See helix.dot.net for a list of queues -->
+    <HelixTargetQueues>Windows.10.Amd64.Open</HelixTargetQueues> <!-- Change to 'Windows.10.Amd64.Client19H1.Xaml' for internal builds. See helix.dot.net for a list of queues -->
     <Creator>winforms</Creator> <!-- Must provide for public builds, must be empty for internal builds -->
     <HelixAccessToken></HelixAccessToken> <!-- Must provide for internal builds, must be empty for public builds -->
     <IncludeDotNetCli>true</IncludeDotNetCli>
@@ -55,9 +55,12 @@
     <XUnitProject Include="..\src\**\System.Windows.Forms.Design.Tests.csproj"/>
     -->
 
-    <XUnitProject Include="..\src\**\Microsoft.VisualBasic.Tests.csproj"/>
+    <!-- <XUnitProject Include="..\src\**\Microsoft.VisualBasic.Tests.csproj"/> -->
+
+
+    <XUnitProject Include="..\src\**\System.Windows.Forms.Tests.csproj"/>
     <!-- 
-    <XUnitProject Include="..\src\**\System.Windows.Forms.Tests.csproj"/> -->
+     -->
 
     <!-- <XUnitProject Include="..\src\**\*.Tests.csproj"
                   Exclude="..\src\**\*.Interop.Tests.csproj"
