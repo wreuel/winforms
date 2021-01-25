@@ -1,0 +1,19 @@
+<Project>
+
+  <ItemGroup> 
+   <!-- Condition="'$(UseOneLocBuild)' == 'true'"> -->
+    <PackageReference Include="Localization.Languages" Version="$(LocalizationLanguagesVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Localization.XLoc" Version="$(LocalizationXLocVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="LSBuild.XLoc" Version="$(LSBuildXLocVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

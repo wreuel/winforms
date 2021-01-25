@@ -1,0 +1,57 @@
+{
+  "Projects": [
+    {
+      "LanguageSet": "VS_Main_Languages",
+      "LocItems": [
+        {
+          "SourceFile": "src\\Microsoft.VisualBasic.Forms\\src\\Resources\\SR.resx"
+        },
+        {
+          "SourceFile": "src\\Microsoft.VisualBasic.Forms\\src\\Resources\\Microsoft\\VisualBasic\\CompilerServices\\VBInputBox.resx"
+        },
+        {
+          "SourceFile": "src\\Microsoft.VisualBasic.Forms\\src\\Resources\\Microsoft\\VisualBasic\\MyServices\\Internal\\ProgressDialog.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms\\src\\Resources\\SR.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms\\src\\Resources\\System\\Windows\\Forms\\mdiwindowdialog.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms\\src\\Resources\\System\\Windows\\Forms\\PrintPreviewDialog.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\BorderSidesEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\CollectionEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\FormatControl.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\LinkAreaEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\MaskDesignerDialog.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\ShortcutKeysEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\SR.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\StringCollectionEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Design\\src\\Resources\\System\\ComponentModel\\Design\\BinaryEditor.resx"
+        },
+        {
+          "SourceFile": "src\\System.Windows.Forms.Primitives\\src\\Resources\\SR.resx"
+        }
+      ]
+    }
+  ]
+}

@@ -78,6 +78,12 @@
   <PropertyGroup>
     <MicrosoftCodeAnalysisPublicApiAnalyzers>3.3.0-beta1.final</MicrosoftCodeAnalysisPublicApiAnalyzers>
   </PropertyGroup>
+  <!-- OneLocBuild -->
+  <PropertyGroup>
+    <LocalizationLanguagesVersion>1.1.12</LocalizationLanguagesVersion>
+    <LocalizationXLocVersion>2.0.1</LocalizationXLocVersion>
+    <LSBuildXLocVersion>7.0.30508</LSBuildXLocVersion>
+  </PropertyGroup>
   <!-- Additional unchanging dependencies -->
   <PropertyGroup>
     <MoqPackageVersion>4.10.0</MoqPackageVersion>
