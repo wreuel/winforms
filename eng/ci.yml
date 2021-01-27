@@ -95,6 +95,10 @@ stages:
             env:
               Token: $(dn-bot-dnceng-artifact-feeds-rw)
 
+        # Run OneLocBuild task only in Debug, ignore pull requests
+        - ${{ if and(eq(variables['System.TeamProject'], 'public'), eq(variables['_BuildConfig'], 'Debug'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+          - script: dotnet build eng\localize.proj /bl:$(BUILD.SOURCESDIRECTORY)\artifacts\log\localize.binlog
+
         # Build and rename binlog
         # The /p:Coverage argument is passed here since some build properties change to accommodate running with
         # coverage. This is part of the workarounds for https://github.com/tonerdo/coverlet/issues/362 and

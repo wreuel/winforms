@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <!--
-    Executes OnLocBuild task
+    Executes OneLocBuild task
+    More info: https://aka.ms/OneLocBuild
   -->
   <Target Name="Localize">
     <PropertyGroup>
