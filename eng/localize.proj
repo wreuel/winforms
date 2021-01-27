@@ -1,25 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Loc">
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Localize">
 
-    <PropertyGroup>
-      <UseOneLocBuild>true</UseOneLocBuild>
-      <ArtifactsLocDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'localize'))</ArtifactsLocDir>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Localization.Languages" Version="$(LocalizationLanguagesVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Localization.XLoc" Version="$(LocalizationXLocVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="LSBuild.XLoc" Version="$(LSBuildXLocVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <!--
-    Validates repository-wide requirements.
-    MSBuild only evaluates the target project once per each set of values of global properties and caches the results.
+    Executes OnLocBuild task
   -->
-  <Target Name="Loc">
+  <Target Name="Localize">
     <PropertyGroup>
-      <_LocRepoRoot>$([MSBuild]::NormalizeDirectory('.\localize'))</_LocRepoRoot>
-      <_LocProject>$(_LocRepoRoot)LocProject.json</_LocProject>
+      <_LocArtifactsDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'localize'))</_LocArtifactsDir>
+      <_LocRepoRoot>$([MSBuild]::NormalizeDirectory('.'))</_LocRepoRoot>
+      <_LocProject>$(_LocRepoRoot)localize.json</_LocProject>
+
       <_LocRunner>dotnet "$(PkgLocalization_XLoc)\tools\netcore\Microsoft.Localization.XLoc.dll"</_LocRunner>
       <_LocRunnerArgs>/f "$(_LocProject)"</_LocRunnerArgs>
-
       <_LocRunnerCommand><![CDATA[
 :: variables required by Localization.XLoc runner
 SET RepoRoot=$(RepoRoot)
-SET OutDir=$(ArtifactsLocDir)
+SET OutDir=$(_LocArtifactsDir)
 SET NUGET_PACKAGES=$(NuGetPackageRoot)
 
 :: localize!

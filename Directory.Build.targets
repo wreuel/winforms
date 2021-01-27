@@ -5,7 +5,6 @@
   <Import Project="$(RepositoryEngineeringDir)packageContent.targets" />
   <Import Project="$(RepositoryEngineeringDir)versioning.targets" />
   <Import Project="$(RepositoryEngineeringDir)ApiCompatibility\PublicApiAnalyzer.targets" />
-  <Import Project="$(RepositoryEngineeringDir)localize\localize.targets" />
 
   <!-- to prevent using MS.NC.Platforms from SDK, which is lagging behind the version that WinForms gets from the CoreFx packages -->
   <ItemGroup>
