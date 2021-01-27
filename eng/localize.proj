@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Loc">
+
+    <PropertyGroup>
+      <UseOneLocBuild>true</UseOneLocBuild>
+      <ArtifactsLocDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'localize'))</ArtifactsLocDir>
+    </PropertyGroup>
+
+  <!--
+    Validates repository-wide requirements.
+    MSBuild only evaluates the target project once per each set of values of global properties and caches the results.
+  -->
+  <Target Name="Loc">
+    <PropertyGroup>
+      <_LocRepoRoot>$([MSBuild]::NormalizeDirectory('.\localize'))</_LocRepoRoot>
+      <_LocProject>$(_LocRepoRoot)LocProject.json</_LocProject>
+      <_LocRunner>dotnet "$(PkgLocalization_XLoc)\tools\netcore\Microsoft.Localization.XLoc.dll"</_LocRunner>
+      <_LocRunnerArgs>/f "$(_LocProject)"</_LocRunnerArgs>
+
+      <_LocRunnerCommand><![CDATA[
+:: variables required by Localization.XLoc runner
+SET RepoRoot=$(RepoRoot)
+SET OutDir=$(ArtifactsLocDir)
+SET NUGET_PACKAGES=$(NuGetPackageRoot)
+
+:: localize!
+$(_LocRunner) $(_LocRunnerArgs)
+]]></_LocRunnerCommand>
+    </PropertyGroup>
+
+    <Message Text="Running Localization..." Importance="high"/>
+    <Exec Command='$(_LocRunnerCommand)'
+          LogStandardErrorAsError="false"
+          WorkingDirectory="$(RepoRoot)"
+          IgnoreExitCode="true"
+          ContinueOnError="WarnAndContinue">
+      <Output TaskParameter="ExitCode" PropertyName="_LocErrorCode" />
+    </Exec>
+
+    <Error Text="Localization failed" Condition="'$(_LocErrorCode)' != '0'" File="OneLocBuild" />
+  </Target>
+
+  <!-- Useless stuff to make Arcade SDK happy
+  <PropertyGroup>
+    <Language>msbuild</Language>
+  </PropertyGroup>
+  <Target Name="Pack"/> -->
+</Project>

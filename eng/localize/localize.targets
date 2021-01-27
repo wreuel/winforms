@@ -1,7 +1,6 @@
 <Project>
 
-  <ItemGroup> 
-   <!-- Condition="'$(UseOneLocBuild)' == 'true'"> -->
+  <ItemGroup Condition="'$(UseOneLocBuild)' == 'true'">
     <PackageReference Include="Localization.Languages" Version="$(LocalizationLanguagesVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
