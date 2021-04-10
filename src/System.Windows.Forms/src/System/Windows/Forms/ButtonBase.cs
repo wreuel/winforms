@@ -381,12 +381,9 @@ namespace System.Windows.Forms
                 return _imageAlign;
             }
             set
-            {
-                if (!WindowsFormsUtils.EnumValidator.IsValidContentAlignment(value))
-                {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ContentAlignment));
-                }
-
+            { 
+                SourceGenerated.EnumValidator.Validate(value);
+                
                 if (value != _imageAlign)
                 {
                     _imageAlign = value;
@@ -671,10 +668,7 @@ namespace System.Windows.Forms
             }
             set
             {
-                if (!WindowsFormsUtils.EnumValidator.IsValidContentAlignment(value))
-                {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ContentAlignment));
-                }
+                SourceGenerated.EnumValidator.Validate(value);
 
                 if (value == TextAlign)
                 {
